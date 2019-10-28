@@ -16,6 +16,8 @@
 
 set -e
 
+set -x
+
 go version
 date
 
@@ -38,6 +40,8 @@ fi
 export GO111MODULE=on # Always use modules.
 export GOPROXY=https://proxy.golang.org
 
+set +x
+
 export GOLANG_SAMPLES_KMS_KEYRING=ring1
 export GOLANG_SAMPLES_KMS_CRYPTOKEY=key1
 
@@ -49,6 +53,8 @@ export GCLOUD_ORGANIZATION=1081635000895
 export GOLANG_SAMPLES_SPANNER=projects/golang-samples-tests/instances/golang-samples-tests
 export GOLANG_SAMPLES_BIGTABLE_PROJECT=golang-samples-tests
 export GOLANG_SAMPLES_BIGTABLE_INSTANCE=testing-instance
+
+set -x
 
 TIMEOUT=45m
 
@@ -66,6 +72,8 @@ echo "Running tests in project $GOLANG_SAMPLES_PROJECT_ID";
 # Always return the project and clean the cache so Kokoro doesn't try to copy
 # it when exiting.
 trap "go clean -modcache; gimmeproj -project golang-samples-tests done $GOLANG_SAMPLES_PROJECT_ID" EXIT
+
+set +x
 
 # Set application credentials to the project-specific account. Some APIs do not
 # allow the service account project and GOOGLE_CLOUD_PROJECT to be different.
