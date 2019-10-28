@@ -28,7 +28,7 @@ mkdir -p $target
 mv github/golang-samples $target
 cd $target/golang-samples
 
-CHANGES=$(git --no-pager diff --name-only HEAD..master)
+CHANGES=$(git --no-pager diff --name-only HEAD..HEAD~)
 SIGNIFICANT_CHANGES=$(echo $CHANGES | tr ' ' '\n' | egrep -v '(\.md$|^\.github)')
 
 # If this is a PR with only insignificant changes, don't run any tests.
