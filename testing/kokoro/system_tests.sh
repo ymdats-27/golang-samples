@@ -29,7 +29,7 @@ mv github/golang-samples $target
 cd $target/golang-samples
 
 CHANGES=$(git --no-pager diff --name-only a2dc74b09071ef340963a1774a75692e07952fab 8e752844c89645f16f72812adbe94a51cb27e44b)
-SIGNIFICANT_CHANGES="$(echo $CHANGES | tr ' ' '\n' | egrep -v '(\.md$|^\.github)')"
+SIGNIFICANT_CHANGES="$(echo $CHANGES | tr ' ' '\n' | egrep -v '(\.md$|^\.github)' || true)"
 
 # If this is a PR with only insignificant changes, don't run any tests.
 if [[ -n ${KOKORO_GITHUB_PULL_REQUEST_NUMBER:-} ]] && [[ -z "$SIGNIFICANT_CHANGES" ]]; then
